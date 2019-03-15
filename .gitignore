@@ -11,6 +11,9 @@
 # production
 /build
 
+# electron 打包
+/release
+
 # misc
 .DS_Store
 .env.local

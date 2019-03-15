@@ -2,12 +2,32 @@
   "name": "help",
   "version": "0.1.0",
   "private": true,
+  "description": "DVA-ELECTRON",
+  "main": "init.js",
+  "homepage": "./",
+  "author": {
+    "name": "lurongze",
+    "email": "1946755280@qq.com"
+  },
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.8.4",
+    "react-app-rewired": "^2.1.1",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-redux": "^6.0.1",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "typescript": "^3.3.3333"
   },
   "scripts": {
+    "package-win": "cross-env NODE_ENV=production yarn build && electron-builder build --win --x64",
+    "dev:electron": "concurrently \"yarn env-to-electron\" \"yarn start\" \"yarn electron-start\"",
+    "dev": "concurrently \"yarn env-to-h5\" \"yarn start\"",
+    "env-to-electron": "cross-env RUN_ENV=electron",
+    "env-to-h5": "cross-env RUN_ENV=h5",
+    "electron-start": "cross-env NODE_ENV=development electron .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -21,5 +41,16 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "electron": "^3.0.10",
+    "electron-builder": "^20.38.2",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "redux-devtools": "^3.5.0"
+  }
 }
