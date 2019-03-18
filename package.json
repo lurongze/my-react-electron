@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "history": "^4.9.0",
     "react": "^16.8.4",
     "react-app-rewired": "^2.1.1",
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",
+    "react-router": "^4.4.0",
+    "react-router-dom": "^4.4.0",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
@@ -28,9 +31,9 @@
     "env-to-electron": "cross-env RUN_ENV=electron",
     "env-to-h5": "cross-env RUN_ENV=h5",
     "electron-start": "cross-env NODE_ENV=development electron .",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

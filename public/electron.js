@@ -120,13 +120,6 @@ app.on('ready', function() {
   ipcMain.on('cancelFlashTray', () => {
     trayFlash(false);
   });
-  ipcMain.on('runNPM', () => {
-
-
-
-
-  });
-
 });
 
 // Quit when all windows are closed.
