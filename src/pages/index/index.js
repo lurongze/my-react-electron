@@ -6,9 +6,15 @@ import { add as listAdd, asyncAdd } from '../../redux/actions/list';
 import { ipcRender } from "../../utils/ELECTRON";
 import { history } from "../../utils/helper";
 
+import axios from 'axios';
+
 import './index.css';
 
 class Index extends Component {
+
+  state = {
+    koaRes: 'empty string'
+  }
 
   handleClick = (key) => {
     const { add, minus, asyncAdd } = this.props;
@@ -29,6 +35,12 @@ class Index extends Component {
 
   getList = () => {
     console.log('getListFunction');
+    axios.get('http://localhost:3016').then((response)=>{
+      const res = response.data;
+      this.setState({
+        koaRes: res
+      })
+    })
   }
 
   linkList = () => {
@@ -37,9 +49,11 @@ class Index extends Component {
 
   render() {
     const { list } = this.props;
+    const { koaRes } = this.state;
     return (
       <div className="page">
         <header className="App-header">
+          <div>{koaRes}</div>
           <div onClick={this.linkList.bind(this)}>LINK LIST</div>
           <div onClick={this.handleClick.bind(this,'add')}>ADD</div>
           <div onClick={this.handleClick.bind(this,'minus')}>MINUS</div>

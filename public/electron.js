@@ -1,7 +1,9 @@
+// koa Serve 启动
+require('./koa/index');
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Tray, Menu, ipcMain } = require('electron');
-const path = require('path')
-const fs = require('fs')
+const { app, BrowserWindow, Tray, Menu, ipcMain, nativeImage } = require('electron');
+const path = require('path');
+const fs = require('fs');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -11,7 +13,7 @@ let tray = null;
 const ROOT_DIR = path.resolve(__dirname, '..')
 
 function updateTray() {
-  const icon = path.normalize(`${ROOT_DIR}/resources/assets/icon/tray.jpg`)
+  const icon = nativeImage.createFromPath(path.normalize(`${ROOT_DIR}/resources/assets/icon/tray.jpg`));
   if(tray === null) {
     tray = new Tray(icon);
   }
@@ -24,10 +26,15 @@ function updateTray() {
   tray.setToolTip('This is my application.');
   tray.setContextMenu(contextMenu);
 }
+
 let flashInterval = null;
 let flashCount = 0;
 function trayFlash(flash = true) {
-  const icons = [path.normalize(`${ROOT_DIR}/resources/assets/icon/tray.jpg`), path.normalize(`${ROOT_DIR}/resources/assets/icon/tray-transparent.png`)];
+  const icons = [
+    nativeImage.createFromPath(path.normalize(`${ROOT_DIR}/resources/assets/icon/tray.jpg`)),
+    nativeImage.createFromPath(path.normalize(`${ROOT_DIR}/resources/assets/icon/tray-transparent.png`))
+  ];
+
   if(tray === null) {
     tray = new Tray(icons[0]);
   }
@@ -76,12 +83,12 @@ function createWindow () {
   // and load the index.html of the app.
   // mainWindow.loadFile('index.html')
   if (process.env.NODE_ENV === 'production') {
-    // mainWindow.loadURL(`file://${__dirname}/dist/index.html`);
-    mainWindow.loadURL(`file://${path.normalize(`${ROOT_DIR}/build/index.html`)}`)
+    mainWindow.loadURL(`file://${path.normalize(`${ROOT_DIR}/build/index.html`)}`);
   } else {
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
-    mainWindow.loadURL('http://127.0.0.1:3000/');
+    // mainWindow.loadURL('http://127.0.0.1:3000/');
+    mainWindow.loadURL(`file://${path.normalize(`${ROOT_DIR}/build/index.html`)}`);
   }
 
   mainWindow.webContents.on('did-finish-load', () => {
@@ -120,6 +127,13 @@ app.on('ready', function() {
   ipcMain.on('cancelFlashTray', () => {
     trayFlash(false);
   });
+  ipcMain.on('runNPM', () => {
+
+
+
+
+  });
+
 });
 
 // Quit when all windows are closed.
